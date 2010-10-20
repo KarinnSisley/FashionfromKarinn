@@ -4,11 +4,12 @@
 #include <string.h>
 #include "SDL/SDL_image.h"
 
-struct cloth {
-        SDL_Surface*picture;
-        SDL_Rect offset;
-        int flag;
-    };
+struct cloth
+{
+    SDL_Surface*picture;
+    SDL_Rect offset;
+    int flag;
+};
 void blitcloth( struct cloth*c, SDL_Surface * dest)
 {
     if (c->flag)
@@ -39,14 +40,14 @@ SDL_Event event;
 
 Uint32 callback ( Uint32 interval, void*p)
 {
- *(int*)p=0;
- return 0;
+    *(int*)p=0;
+    return 0;
 }
 
 int main( int argc, char *args [])
 {
     int quite = 0;
-    int shoulderx=36/2, shouldery=65,x,y,press,length,height,score=0;
+    int shoulderx=36/2, shouldery=65,x,y,press=0,length,height,score=0;
 
     SDL_Surface* screen = NULL;
     SDL_Surface* background = NULL;
@@ -57,7 +58,7 @@ int main( int argc, char *args [])
 
     screen = SDL_SetVideoMode( 1024, 700, 16, SDL_SWSURFACE );
 
-    SDL_AddTimer(7000,callback, &nenuzhnaya);
+    SDL_AddTimer(3000,callback, &nenuzhnaya);
     background = IMG_Load("background1.jpg");
     dita.picture = Load_Image("dita.png");
     dita.flag=1;
@@ -111,58 +112,59 @@ int main( int argc, char *args [])
 
     while (quite == 0)
     {
-        while( SDL_PollEvent( &event ) )
+        while ( SDL_PollEvent( &event ) )
         {
-            if( event.type == SDL_QUIT )
+            if ( event.button.button == SDL_BUTTON_LEFT )
+            {
+                x = event.button.x;
+                y = event.button.y;
+                length=bag.offset.x + bag.offset.w;
+                height=bag.offset.y + bag.offset.h;
+                if (x>bag.offset.x && x<(length) && y>bag.offset.y && y<(height))
+                {
+                    press=1;
+                    continue;
+                }
+
+                if (press)
+                {
+
+                    x = event.button.x;
+                    y = event.button.y;
+                    length=forbags.offset.x + forbags.offset.w;
+                    height=forbags.offset.y + forcoat.offset.h;
+
+                    if (x>forbags.offset.x && x<(length) && y>forbags.offset.y && y<(height))
+                        score=score+10;
+                    bag.flag=0;
+
+
+                }
+            }
+            if ( event.type == SDL_QUIT )
             {
                 quite = 1;
             }
-
         }
-    SDL_BlitSurface( background, NULL, screen, NULL );
+        SDL_BlitSurface( background, NULL, screen, NULL );
 
-    blitcloth (&dita, screen);
-    blitcloth (&dress, screen);
-    blitcloth (&blackshoes,screen);
-    blitcloth (&whitecoat, screen);
-    blitcloth (&bag, screen);
-    blitcloth (&forcoat,screen);
-    blitcloth (&fordress,screen);
-    blitcloth (&forshoes, screen);
-    blitcloth (&forbags, screen);
-    if(nenuzhnaya)
-    {
-    blitcloth (&forshoestxt,screen);
-    blitcloth (&forovercoatstxt,screen);
-    blitcloth (&fordressestxt,screen);
-    blitcloth (&forbagstxt,screen);
+        blitcloth (&dita, screen);
+        blitcloth (&dress, screen);
+        blitcloth (&blackshoes,screen);
+        blitcloth (&whitecoat, screen);
+        blitcloth (&bag, screen);
+        blitcloth (&forcoat,screen);
+        blitcloth (&fordress,screen);
+        blitcloth (&forshoes, screen);
+        blitcloth (&forbags, screen);
+        if (nenuzhnaya)
+        {
+            blitcloth (&forshoestxt,screen);
+            blitcloth (&forovercoatstxt,screen);
+            blitcloth (&fordressestxt,screen);
+            blitcloth (&forbagstxt,screen);
+        }
+        SDL_Flip( screen );
     }
-    SDL_Flip( screen );
-
-    }
-
-    if( event.button.button == SDL_BUTTON_LEFT )
-    {x = event.button.x;
-     y = event.button.y;
-     length=bag.offset.x + bag.offset.w;
-     height=bag.offset.y + bag.offset.h;
-     if (x>bag.offset.x && x<(length) && y>bag.offset.y && y<(height))
-      press=1;
-    }
-    if(press)
-    {if( event.button.button == SDL_BUTTON_LEFT )
-     {x = event.button.x;
-     y = event.button.y;
-     length=forbags.offset.x + forbags.offset.w;
-     height=forbags.offset.y + forcoat.offset.h;
-     }
-     if (x>forbags.offset.x && x<(length) && y>forbags.offset.y && y<(height))
-     score=score+10;
-     bag.flag=0;
-
-    }
-
-
-
     return 0;
 }
