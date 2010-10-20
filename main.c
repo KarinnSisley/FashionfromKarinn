@@ -4,6 +4,18 @@
 #include <string.h>
 #include "SDL/SDL_image.h"
 
+struct cloth {
+        SDL_Surface*picture;
+        SDL_Rect offset;
+        int flag;
+    };
+void blitcloth( struct cloth*c, SDL_Surface * dest)
+{
+    if (c->flag)
+        SDL_BlitSurface (c->picture, NULL, dest, &c->offset);
+
+}
+
 SDL_Surface *Load_Image (char *filename)
 {
     SDL_Surface *Loaded_Image=NULL;
@@ -35,55 +47,65 @@ int main( int argc, char *args [])
 {
     int quite = 0;
     int shoulderx=36/2, shouldery=65,x,y,press,length,height,score=0;
-    struct cloth {SDL_Surface*picture,SDL_Rect rect, int flag};
+
     SDL_Surface* screen = NULL;
     SDL_Surface* background = NULL;
-    SDL_Surface* dita = NULL;
-    struct cloth dress,blackshoes,whitecoat,bag,forcoat,fordress,forshoes,forbags,forshoestxt,forovercoatstxt,fordressestxt,forbagstxt;
+    struct cloth dita,dress,blackshoes,whitecoat,bag,forcoat,fordress,forshoes,forbags,forshoestxt,forovercoatstxt,fordressestxt,forbagstxt;
     int nenuzhnaya=1;
 
     SDL_Init( SDL_INIT_EVERYTHING );
-    SDL_Rect offset;
 
     screen = SDL_SetVideoMode( 1024, 700, 16, SDL_SWSURFACE );
 
     SDL_AddTimer(7000,callback, &nenuzhnaya);
     background = IMG_Load("background1.jpg");
+    dita.picture = Load_Image("dita.png");
+    dita.flag=1;
     dress.picture = Load_Image ("dress.png");
     dress.flag=1;
-    blackshoes = Load_Image ("blackshoes.png");
-    dita = Load_Image("dita.png");
-    whitecoat = Load_Image("whitecoat.png");
-    bag= Load_Image("bag.png");
-    forcoat= IMG_Load ("forcoat1.png");
-    fordress= IMG_Load ("fordress.png");
-    forshoes= Load_Image("forshoes.png");
-    forbags= Load_Image("forbags.png");
-    forshoestxt= Load_Image("forshoestxt.png");
-    forovercoatstxt= Load_Image("forovercoatstxt.png");
-    fordressestxt= Load_Image("fordressestxt.png");
-    forbagstxt= Load_Image("forbagstxt.png");
+    blackshoes.picture = Load_Image ("blackshoes.png");
+    blackshoes.flag=1;
+    whitecoat.picture = Load_Image("whitecoat.png");
+    whitecoat.flag=1;
+    bag.picture= Load_Image("bag.png");
+    bag.flag=1;
+    forcoat.picture= IMG_Load ("forcoat1.png");
+    forcoat.flag=1;
+    fordress.picture= IMG_Load ("fordress.png");
+    fordress.flag=1;
+    forshoes.picture= Load_Image("forshoes.png");
+    forshoes.flag=1;
+    forbags.picture= Load_Image("forbags.png");
+    forbags.flag=1;
+    forshoestxt.picture= Load_Image("forshoestxt.png");
+    forshoestxt.flag=1;
+    forovercoatstxt.picture= Load_Image("forovercoatstxt.png");
+    forovercoatstxt.flag=1;
+    fordressestxt.picture= Load_Image("fordressestxt.png");
+    fordressestxt.flag=1;
+    forbagstxt.picture= Load_Image("forbagstxt.png");
+    forbags.flag=1;
 
 
 
-    offset.x = 1024/2-dita->w/2;
-    offset.y = 700/2-dita->h/2;
-    dress.rect.x = (1024/2-dita->w/2)+ shoulderx;
-    dress.rect.y = (700/2-dita->h/2)+ shouldery;
-    offset3.x = 1024/2-blackshoes->w/2-10;
-    offset3.y = 1024/2-15;
-    offset4.x = (1024/2-dita->w/2)+ shoulderx-14;
-    offset4.y = (700/2-dita->h/2)+ shouldery-20;
-    offset5.x = (1024/2-dita->w/2)+ 5.3*shoulderx;
-    offset5.y = (700/2-dita->h/2)+ 3*shouldery;
-    offset6.x = 1024/16;
-    offset6.y = 700/12;
-    offset7.x = 3000/4;
-    offset7.y = 700/14;
-    offset8.x= 1024/16;
-    offset8.y= 2000/5;
-    offset9.x= 3000/4;
-    offset9.y= 800/2;
+    dita.offset.x = 1024/2-dita.picture->w/2;
+    dita.offset.y = 700/2-dita.picture->h/2;
+    dress.offset.x = (1024/2-dita.picture->w/2)+ shoulderx;
+    dress.offset.y = (700/2-dita.picture->h/2)+ shouldery;
+    blackshoes.offset.x = 1024/2-blackshoes.picture->w/2-10;
+    blackshoes.offset.y = 1024/2-15;
+    whitecoat.offset.x = (1024/2-dita.picture->w/2)+ shoulderx-14;
+    whitecoat.offset.y = (700/2-dita.picture->h/2)+ shouldery-20;
+    bag.offset.x = (1024/2-dita.picture->w/2)+ 5.3*shoulderx;
+    bag.offset.y = (700/2-dita.picture->h/2)+ 3*shouldery;
+    forcoat.offset.x = 1024/16;
+    forcoat.offset.y = 700/12;
+    fordress.offset.x = 3000/4;
+    fordress.offset.y = 700/14;
+    forshoes.offset.x= 1024/16;
+    fordress.offset.y= 2000/5;
+    forbags.offset.x= 3000/4;
+    forbags.offset.y= 800/2;
 
 
 
@@ -98,44 +120,45 @@ int main( int argc, char *args [])
 
         }
     SDL_BlitSurface( background, NULL, screen, NULL );
-    SDL_BlitSurface (dita, NULL, screen, &offset);
-    SDL_BlitSurface (dress, NULL, screen, &offset2);
-    SDL_BlitSurface (blackshoes, NULL, screen, &offset3);
-    SDL_BlitSurface (whitecoat, NULL, screen, &offset4);
-    SDL_BlitSurface (bag, NULL, screen, &offset5);
-    SDL_BlitSurface (forcoat, NULL, screen, &offset6);
-    SDL_BlitSurface (fordress, NULL, screen, &offset7);
-    SDL_BlitSurface (forshoes, NULL, screen, &offset8);
-    SDL_BlitSurface (forbags, NULL, screen, &offset9);
 
-    if ( nenuzhnaya)
+    blitcloth (&dita, screen);
+    blitcloth (&dress, screen);
+    blitcloth (&blackshoes,screen);
+    blitcloth (&whitecoat, screen);
+    blitcloth (&bag, screen);
+    blitcloth (&forcoat,screen);
+    blitcloth (&fordress,screen);
+    blitcloth (&forshoes, screen);
+    blitcloth (&forbags, screen);
+    if(nenuzhnaya)
     {
-    SDL_BlitSurface (forshoestxt, NULL, screen, &offset8);
-    SDL_BlitSurface (forovercoatstxt, NULL, screen, &offset6);
-    SDL_BlitSurface (fordressestxt, NULL, screen, &offset7);
-    SDL_BlitSurface (forbagstxt, NULL, screen, &offset9);
+    blitcloth (&forshoestxt,screen);
+    blitcloth (&forovercoatstxt,screen);
+    blitcloth (&fordressestxt,screen);
+    blitcloth (&forbagstxt,screen);
     }
     SDL_Flip( screen );
+
     }
 
     if( event.button.button == SDL_BUTTON_LEFT )
     {x = event.button.x;
      y = event.button.y;
-     length=offset9.x + whitecoat->w;
-     height=offset9.y + whitecoat->h;
-     if (x>offset9.x && x<(length) && y>offset9.y && y<(height))
+     length=bag.offset.x + bag.offset.w;
+     height=bag.offset.y + bag.offset.h;
+     if (x>bag.offset.x && x<(length) && y>bag.offset.y && y<(height))
       press=1;
     }
     if(press)
     {if( event.button.button == SDL_BUTTON_LEFT )
      {x = event.button.x;
      y = event.button.y;
-     length=offset6.x + forcoat->w;
-     height=offset6.y + forcoat->h;
+     length=forbags.offset.x + forbags.offset.w;
+     height=forbags.offset.y + forcoat.offset.h;
      }
-     if (x>offset6.x && x<(length) && y>offset6.y && y<(height))
+     if (x>forbags.offset.x && x<(length) && y>forbags.offset.y && y<(height))
      score=score+10;
-
+     bag.flag=0;
 
     }
 
