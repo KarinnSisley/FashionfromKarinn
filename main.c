@@ -58,7 +58,7 @@ int main( int argc, char *args [])
 
     screen = SDL_SetVideoMode( 1024, 700, 16, SDL_SWSURFACE );
 
-    SDL_AddTimer(3000,callback, &nenuzhnaya);
+    SDL_AddTimer(7000,callback, &nenuzhnaya);
     background = IMG_Load("background1.jpg");
     dita.picture = Load_Image("dita.png");
     dita.flag=1;
@@ -85,7 +85,7 @@ int main( int argc, char *args [])
     fordressestxt.picture= Load_Image("fordressestxt.png");
     fordressestxt.flag=1;
     forbagstxt.picture= Load_Image("forbagstxt.png");
-    forbags.flag=1;
+    forbagstxt.flag=1;
 
 
 
@@ -104,10 +104,17 @@ int main( int argc, char *args [])
     fordress.offset.x = 3000/4;
     fordress.offset.y = 700/14;
     forshoes.offset.x= 1024/16;
-    fordress.offset.y= 2000/5;
+    forshoes.offset.y=800/2;
     forbags.offset.x= 3000/4;
     forbags.offset.y= 800/2;
-
+    forshoestxt.offset.x=1024/18;
+    forshoestxt.offset.y=430;
+    forovercoatstxt.offset.x=1024/16;
+    forovercoatstxt.offset.y=700/9;
+    fordressestxt.offset.x=3000/4;
+    fordressestxt.offset.y= 22;
+    forbagstxt.offset.x= 3000/4;
+    forbagstxt.offset.y=800/2;
 
 
     while (quite == 0)
