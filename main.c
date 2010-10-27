@@ -47,12 +47,13 @@ Uint32 callback ( Uint32 interval, void*p)
 int main( int argc, char *args [])
 {
     int quite = 0;
-    int shoulderx=36/2, shouldery=65,x,y,press=0,length,height,score=0;
+    int shoulderx=36/2, shouldery=65,x,y,length,height,score=0;
 
     SDL_Surface* screen = NULL;
     SDL_Surface* background = NULL;
     struct cloth dita,dress,blackshoes,whitecoat,bag,forcoat,fordress,forshoes,forbags,forshoestxt,forovercoatstxt,fordressestxt,forbagstxt;
     int nenuzhnaya=1;
+    struct cloth *cloth_selected=NULL;
 
     SDL_Init( SDL_INIT_EVERYTHING );
 
@@ -121,7 +122,7 @@ int main( int argc, char *args [])
     {
         while ( SDL_PollEvent( &event ) )
         {
-            if ( event.button.button == SDL_BUTTON_LEFT )
+            if ( event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
             {
                 x = event.button.x;
                 y = event.button.y;
@@ -129,11 +130,11 @@ int main( int argc, char *args [])
                 height=bag.offset.y + bag.offset.h;
                 if (x>bag.offset.x && x<(length) && y>bag.offset.y && y<(height))
                 {
-                    press=1;
+                    cloth_selected=&bag;
                     continue;
                 }
 
-                if (press)
+                if (cloth_selected==&bag)
                 {
 
                     x = event.button.x;
@@ -144,8 +145,54 @@ int main( int argc, char *args [])
                     if (x>forbags.offset.x && x<(length) && y>forbags.offset.y && y<(height))
                         score=score+10;
                     bag.flag=0;
+                    cloth_selected=NULL;
+                }
 
+                x = event.button.x;
+                y = event.button.y;
+                length=whitecoat.offset.x + whitecoat.offset.w;
+                height=whitecoat.offset.y + whitecoat.offset.h;
+                if (x>whitecoat.offset.x && x<(length) && y>whitecoat.offset.y && y<(height))
+                {
+                    cloth_selected=&whitecoat;
+                    continue;
+                }
 
+                if (cloth_selected==&whitecoat)
+                {
+
+                    x = event.button.x;
+                    y = event.button.y;
+                    length=forcoat.offset.x + forcoat.offset.w;
+                    height=forcoat.offset.y + forcoat.offset.h;
+
+                    if (x>forcoat.offset.x && x<(length) && y>forcoat.offset.y && y<(height))
+                        score=score+10;
+                    whitecoat.flag=0;
+                    cloth_selected=NULL;
+                }
+                 x = event.button.x;
+                y = event.button.y;
+                length=blackshoes.offset.x + blackshoes.offset.w;
+                height=blackshoes.offset.y + blackshoes.offset.h;
+                if (x>blackshoes.offset.x && x<(length) && y>blackshoes.offset.y && y<(height))
+                {
+                    cloth_selected=&blackshoes;
+                    continue;
+                }
+
+                if (cloth_selected==&blackshoes)
+                {
+
+                    x = event.button.x;
+                    y = event.button.y;
+                    length=forcoat.offset.x + forcoat.offset.w;
+                    height=forcoat.offset.y + forcoat.offset.h;
+
+                    if (x>forshoes.offset.x && x<(length) && y>forshoes.offset.y && y<(height))
+                        score=score+10;
+                    blackshoes.flag=0;
+                    cloth_selected=NULL;
                 }
             }
             if ( event.type == SDL_QUIT )
