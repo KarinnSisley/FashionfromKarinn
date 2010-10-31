@@ -186,12 +186,35 @@ int main( int argc, char *args [])
 
                     x = event.button.x;
                     y = event.button.y;
-                    length=forcoat.offset.x + forcoat.offset.w;
-                    height=forcoat.offset.y + forcoat.offset.h;
+                    length=forshoes.offset.x + forshoes.offset.w;
+                    height=forshoes.offset.y + forshoes.offset.h;
 
                     if (x>forshoes.offset.x && x<(length) && y>forshoes.offset.y && y<(height))
                         score=score+10;
                     blackshoes.flag=0;
+                    cloth_selected=NULL;
+                }
+                x = event.button.x;
+                y = event.button.y;
+                length=dress.offset.x + dress.offset.w;
+                height=dress.offset.y + dress.offset.h;
+                if (x>dress.offset.x && x<(length) && y>dress.offset.y && y<(height))
+                {
+                    cloth_selected=&dress;
+                    continue;
+                }
+
+                if (cloth_selected==&dress)
+                {
+
+                    x = event.button.x;
+                    y = event.button.y;
+                    length=fordress.offset.x + fordress.offset.w;
+                    height=fordress.offset.y + fordress.offset.h;
+
+                    if (x>fordress.offset.x && x<(length) && y>fordress.offset.y && y<(height))
+                        score=score+10;
+                    dress.flag=0;
                     cloth_selected=NULL;
                 }
             }
