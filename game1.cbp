@@ -30,11 +30,11 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add directory="C:\Users\Карина\МАТИ\информатика\SDL-1.2.14\include" />
+			<Add directory="C:\Users\Karinn\МАТИ\информатика\SDL-1.2.14\include" />
 		</Compiler>
 		<Linker>
 			<Add option="-lmingw32 -lSDLmain -lSDL -lSDL_image" />
-			<Add directory="C:\Users\Карина\МАТИ\информатика\SDL-1.2.14\lib" />
+			<Add directory="C:\Users\Karinn\МАТИ\информатика\SDL-1.2.14\lib" />
 		</Linker>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
