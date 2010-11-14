@@ -66,7 +66,7 @@ int main( int argc, char *args [])
     screen = SDL_SetVideoMode( 1024, 700, 16, SDL_SWSURFACE );
 
     SDL_AddTimer(3000,callback, &nenuzhnaya);
-    level=2;
+    level=1;
     background = IMG_Load("background1.jpg");
     girl.picture = Load_Image("dita.png");
     girl.flag=1;
@@ -268,96 +268,88 @@ int main( int argc, char *args [])
                     continue;
                 }
                 else if (score==40)
+                {
+                    nenuzhnaya=1;
                     level=2;
+                    SDL_AddTimer(7000,callback, &nenuzhnaya);
+                    background = IMG_Load("background2.png");
+                    girl.picture = Load_Image("audrey.png");
+                    girl.flag=1;
+                    dress.picture = Load_Image ("audreydress.png");
+                    dress.flag=1;
+                    shoes.picture = Load_Image ("audreyboots.png");
+                    shoes.flag=1;
+                    jewelry.picture = Load_Image("audreybracelet.png");
+                    jewelry.flag=1;
+                    bag.picture= Load_Image("bag2.png");
+                    bag.flag=1;
+                    trousers.picture= Load_Image("audreytrousers.png");
+                    trousers.flag=1;
+                    fortrousers.picture= IMG_Load ("fortrousers.png");
+                    forcoat.flag=1;
+                    fordress.picture= IMG_Load ("fordress2.png");
+                    fordress.flag=1;
+                    forshoes.picture= IMG_Load ("forshoes2.png");
+                    forshoes.flag=1;
+                    forbags.picture= IMG_Load ("forbags2.png");
+                    forbags.flag=1;
+                    forjewelry.picture= IMG_Load ("forjew.png");
+                    forjewelry.flag=1;
+                    fortrouserstxt.picture= Load_Image("fortrouserstxt2.png");
+                    fortrouserstxt.flag=1;
+                    fordressestxt.picture= Load_Image("fordresstxt2.png");
+                    fordressestxt.flag=1;
+                    forbagstxt.picture= Load_Image("forbagstxt2.png");
+                    forbagstxt.flag=1;
+                    forjewelrytxt.picture= Load_Image("forjewtxt2.png");
+                    forjewelrytxt.flag=1;
+                    forshoestxt.picture= Load_Image("forshoestxt2.png");
+                    forshoestxt.flag=1;
+
+                    girl.offset.x = 1024/2-girl.picture->w/2;
+                    girl.offset.y = 700/2-girl.picture->h/2;
+                    dress.offset.x = (1024/2-girl.picture->w/2)+ 22;
+                    dress.offset.y = (700/2-girl.picture->h/2)+57;
+                    shoes.offset.x = 1024/2-shoes.picture->w/2-19;
+                    shoes.offset.y = 1024/2-73;
+                    trousers.offset.x = (1024/2-girl.picture->w/2)+18;
+                    trousers.offset.y = (700/2-girl.picture->h/2)+150;
+                    bag.offset.x = (1024/2-girl.picture->w/2)-3;
+                    bag.offset.y = (700/2-girl.picture->h/2)+230;
+                    jewelry.offset.x = (1024/2-girl.picture->w/2)+130;
+                    jewelry.offset.y = (700/2-girl.picture->h/2)+ 215;
+                    fortrousers.offset.x = 1024/20-70;
+                    fortrousers.offset.y = 700/20-50;
+                    fordress.offset.x = 1050;
+                    fordress.offset.y = 700/20-30;
+                    forshoes.offset.x= 1024/20-30;
+                    forshoes.offset.y=800/1.6;
+                    forbags.offset.x=1040;
+                    forbags.offset.y= 700/1.5+23;
+                    forjewelry.offset.x= 3000/4;
+                    forjewelry.offset.y= 0.3;
+                    forshoestxt.offset.x=100;
+                    forshoestxt.offset.y=500;
+                    fortrouserstxt.offset.x=1024/26;
+                    fortrouserstxt.offset.y=700/18;
+                    fordressestxt.offset.x=992;
+                    fordressestxt.offset.y= 230;
+                    forbagstxt.offset.x= 3000/4;
+                    forbagstxt.offset.y=800/2;
+                    forjewelrytxt.offset.x= 3000/4-50;
+                    forjewelrytxt.offset.y=800/10;
+
+
+
+                }
             }
         }
 
 
         if (level==2)
         {
-            screen = SDL_SetVideoMode( 1250, 998, 16, SDL_SWSURFACE );
-            nenuzhnaya=1;
-            SDL_AddTimer(7000,callback, &nenuzhnaya);
-            background = IMG_Load("background2.png");
-            girl.picture = Load_Image("audrey.png");
-            girl.flag=1;
-            dress.picture = Load_Image ("audreydress.png");
-            dress.flag=1;
-            shoes.picture = Load_Image ("audreyboots.png");
-            shoes.flag=1;
-            jewelry.picture = Load_Image("audreybracelet.png");
-            jewelry.flag=1;
-            bag.picture= Load_Image("bag2.png");
-            bag.flag=1;
-            trousers.picture= Load_Image("audreytrousers.png");
-            trousers.flag=1;
-            fortrousers.picture= IMG_Load ("fortrousers.png");
-            forcoat.flag=1;
-            fordress.picture= IMG_Load ("fordress2.png");
-            fordress.flag=1;
-            forshoes.picture= IMG_Load ("forshoes2.png");
-            forshoes.flag=1;
-            forbags.picture= IMG_Load ("forbags2.png");
-            forbags.flag=1;
-            forjewelry.picture= IMG_Load ("forjew.png");
-            forjewelry.flag=1;
-            fortrouserstxt.picture= Load_Image("fortrouserstxt.png");
-            fortrouserstxt.flag=1;
-            fordressestxt.picture= Load_Image("fordressestxt2.png");
-            fordressestxt.flag=1;
-            forbagstxt.picture= Load_Image("forbagstxt2.png");
-            forbagstxt.flag=1;
-            forjewelrytxt.picture= Load_Image("forjewtxt2.png");
-            forjewelrytxt.flag=1;
-            forshoestxt.picture= Load_Image("forshoestxt2.png");
-            forshoestxt.flag=1;
-
-            girl.offset.x = 1024/2-girl.picture->w/2;
-            girl.offset.y = 700/2-girl.picture->h/2;
-            dress.offset.x = (1024/2-girl.picture->w/2)+ 22;
-            dress.offset.y = (700/2-girl.picture->h/2)+57;
-            shoes.offset.x = 1024/2-shoes.picture->w/2-19;
-            shoes.offset.y = 1024/2-73;
-            trousers.offset.x = (1024/2-girl.picture->w/2)+18;
-            trousers.offset.y = (700/2-girl.picture->h/2)+150;
-            bag.offset.x = (1024/2-girl.picture->w/2)-3;
-            bag.offset.y = (700/2-girl.picture->h/2)+230;
-            jewelry.offset.x = (1024/2-girl.picture->w/2)+130;
-            jewelry.offset.y = (700/2-girl.picture->h/2)+ 215;
-            fortrousers.offset.x = 1024/20-70;
-            fortrousers.offset.y = 700/20-50;
-            fordress.offset.x = 1100;
-            fordress.offset.y = 700/20-30;
-            forshoes.offset.x= 1024/20-30;
-            forshoes.offset.y=800/1.6;
-            forbags.offset.x=1040;
-            forbags.offset.y= 700/1.5+23;
-            forjewelry.offset.x= 3000/4;
-            forjewelry.offset.y= 0.3;
-            forshoestxt.offset.x=100;
-            forshoestxt.offset.y=500;
-            fortrouserstxt.offset.x=1024/26-200;
-            fortrouserstxt.offset.y=700/18;
-            fordressestxt.offset.x=3000/6;
-            fordressestxt.offset.y= 22;
-            forbagstxt.offset.x= 3000/4;
-            forbagstxt.offset.y=800/2;
-            forjewelrytxt.offset.x= 3000/4-50;
-            forjewelrytxt.offset.y=800/10;
-        }
-
-
-
-
-        while ( SDL_PollEvent( &event ) )
-        {
-
             if ( event.type == SDL_QUIT )
                 quite = 1;
-
-
-
-
             SDL_BlitSurface( background, NULL, screen, NULL );
             blitcloth (&girl, screen);
             blitcloth (&trousers, screen);
