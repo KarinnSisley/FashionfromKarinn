@@ -66,7 +66,7 @@ int main( int argc, char *args [])
     screen = SDL_SetVideoMode( 1024, 700, 16, SDL_SWSURFACE );
 
     SDL_AddTimer(3000,callback, &nenuzhnaya);
-    level=1;
+    level=2;
     background = IMG_Load("background1.jpg");
     girl.picture = Load_Image("dita.png");
     girl.flag=1;
@@ -273,8 +273,10 @@ int main( int argc, char *args [])
         }
 
 
-        if ( level==2)
+        if (level==2)
         {
+            screen = SDL_SetVideoMode( 1250, 998, 16, SDL_SWSURFACE );
+            nenuzhnaya=1;
             SDL_AddTimer(7000,callback, &nenuzhnaya);
             background = IMG_Load("background2.png");
             girl.picture = Load_Image("audrey.png");
@@ -322,26 +324,39 @@ int main( int argc, char *args [])
             bag.offset.y = (700/2-girl.picture->h/2)+230;
             jewelry.offset.x = (1024/2-girl.picture->w/2)+130;
             jewelry.offset.y = (700/2-girl.picture->h/2)+ 215;
-            fortrousers.offset.x = 1024/16;
-            fortrousers.offset.y = 700/12;
-            fordress.offset.x = 3000/4;
-            fordress.offset.y = 700/14;
-            forshoes.offset.x= 1024/16;
-            forshoes.offset.y=800/2;
-            forbags.offset.x= 3000/4;
-            forbags.offset.y= 800/2;
+            fortrousers.offset.x = 1024/20-70;
+            fortrousers.offset.y = 700/20-50;
+            fordress.offset.x = 1100;
+            fordress.offset.y = 700/20-30;
+            forshoes.offset.x= 1024/20-30;
+            forshoes.offset.y=800/1.6;
+            forbags.offset.x=1040;
+            forbags.offset.y= 700/1.5+23;
             forjewelry.offset.x= 3000/4;
-            forjewelry.offset.y= 800/2;
-            forshoestxt.offset.x=1024/18;
-            forshoestxt.offset.y=430;
-            fortrouserstxt.offset.x=1024/16;
-            fortrouserstxt.offset.y=700/9;
-            fordressestxt.offset.x=3000/4;
+            forjewelry.offset.y= 0.3;
+            forshoestxt.offset.x=100;
+            forshoestxt.offset.y=500;
+            fortrouserstxt.offset.x=1024/26-200;
+            fortrouserstxt.offset.y=700/18;
+            fordressestxt.offset.x=3000/6;
             fordressestxt.offset.y= 22;
             forbagstxt.offset.x= 3000/4;
             forbagstxt.offset.y=800/2;
-            forjewelrytxt.offset.x= 3000/4;
-            forjewelrytxt.offset.y=800/2;
+            forjewelrytxt.offset.x= 3000/4-50;
+            forjewelrytxt.offset.y=800/10;
+        }
+
+
+
+
+        while ( SDL_PollEvent( &event ) )
+        {
+
+            if ( event.type == SDL_QUIT )
+                quite = 1;
+
+
+
 
             SDL_BlitSurface( background, NULL, screen, NULL );
             blitcloth (&girl, screen);
@@ -350,22 +365,23 @@ int main( int argc, char *args [])
             blitcloth (&shoes,screen);
             blitcloth (&bag, screen);
             blitcloth (&jewelry, screen);
-            /*blitcloth (&fortrousers,screen);
+            blitcloth (&fortrousers,screen);
             blitcloth (&fordress,screen);
             blitcloth (&forshoes, screen);
             blitcloth (&forbags, screen);
-            blitcloth (&forjewelry, screen);*/
+            blitcloth (&forjewelry, screen);
+            if (nenuzhnaya)
+            {
+                blitcloth (&forshoestxt,screen);
+                blitcloth (&fortrouserstxt,screen);
+                blitcloth (&fordressestxt,screen);
+                blitcloth (&forbagstxt,screen);
+                blitcloth (&forjewelrytxt,screen);
+            }
             SDL_Flip( screen );
 
         }
 
-
-
     }
-
-
-
-
-
     return 0;
 }
