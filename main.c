@@ -48,8 +48,8 @@ Uint32 callback ( Uint32 interval, void*p)
 
 int main( int argc, char *args [])
 {
-    char b[15];
-    int shoulderx=36/2, shouldery=65,x,y,length,height,score=40,quite = 0,nenuzhnaya=1,level;
+    char b[20];
+    int shoulderx=36/2, shouldery=65,x,y,length,height,score=0,quite = 0,nenuzhnaya=1,level;
     TTF_Init();
     SDL_Surface* screen = NULL;
     SDL_Surface *message = NULL;
@@ -133,7 +133,7 @@ int main( int argc, char *args [])
         {
             if (level==1)
             {
-                SDL_AddTimer(3000,callback, &nenuzhnaya);
+                SDL_AddTimer(8000,callback, &nenuzhnaya);
                 if ( !nenuzhnaya && event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
                 {
                     x = event.button.x;
@@ -317,7 +317,7 @@ int main( int argc, char *args [])
                     trousers.offset.y = (700/2-girl.picture->h/2)+150;
                     bag.offset.x = (1024/2-girl.picture->w/2)-3;
                     bag.offset.y = (700/2-girl.picture->h/2)+230;
-                    jewelry.offset.x = (1024/2-girl.picture->w/2)+130;
+                    jewelry.offset.x = (1024/2-girl.picture->w/2)+137;
                     jewelry.offset.y = (700/2-girl.picture->h/2)+ 215;
                     fortrousers.offset.x = 1024/20-70;
                     fortrousers.offset.y = 700/20-50;
@@ -371,6 +371,28 @@ int main( int argc, char *args [])
                     bag.flag=0;
                     cloth_selected=NULL;
                 }
+                x= event.button.x;
+                y = event.button.y;
+                length=dress.offset.x + dress.offset.w;
+                height=dress.offset.y + dress.offset.h;
+                if (x>dress.offset.x && x<(length) && y>dress.offset.y && y<(height))
+                {
+                    cloth_selected=&dress;
+                    continue;
+                }
+                if (cloth_selected==&dress)
+                {
+
+                    x = event.button.x;
+                    y = event.button.y;
+                    length=fordress.offset.x + fordress.offset.w;
+                    height=fordress.offset.y + fordress.offset.h;
+
+                    if (x>fordress.offset.x && x<(length) && y>fordress.offset.y && y<(height))
+                        score=score+10;
+                    dress.flag=0;
+                    cloth_selected=NULL;
+                }
                 length=trousers.offset.x + trousers.offset.w;
                 height=trousers.offset.y + trousers.offset.h;
                 if (x>trousers.offset.x && x<(length) && y>trousers.offset.y && y<(height))
@@ -414,6 +436,31 @@ int main( int argc, char *args [])
                     cloth_selected=NULL;
                 }
 
+                x = event.button.x;
+                y = event.button.y;
+                length=shoes.offset.x + shoes.offset.w;
+                height=shoes.offset.y + shoes.offset.h;
+                if (x>shoes.offset.x && x<(length) && y>shoes.offset.y && y<(height))
+                {
+                    cloth_selected=&shoes;
+                    continue;
+                }
+
+                if (cloth_selected==&shoes)
+                {
+
+                    x = event.button.x;
+                    y = event.button.y;
+                    length=forshoes.offset.x + forshoes.offset.w;
+                    height=forshoes.offset.y + forshoes.offset.h;
+
+                    if (x>forshoes.offset.x && x<(length) && y>forshoes.offset.y && y<(height))
+                        score=score+10;
+                    shoes.flag=0;
+                    cloth_selected=NULL;
+                }
+
+
             }
             if ( event.type == SDL_QUIT )
                 quite = 1;
@@ -438,10 +485,32 @@ int main( int argc, char *args [])
                 blitcloth (&forbagstxt,screen);
                 blitcloth (&forjewelrytxt,screen);
             }
+            snprintf(b, sizeof (b), "score: %d", score);
+            SDL_Color textColor = { 50, 205, 50 };
+            message = TTF_RenderText_Solid( font, b, textColor );
+            text.x= 900/2;
+            text.y=700/18;
+            text.w=message->w;
+            text.h=message->h;
+            SDL_BlitSurface( message, NULL,screen, &text );
             SDL_Flip( screen );
 
-        }
+            if (score<90 && dress.flag==0 && bag.flag==0 && trousers.flag==0 && shoes.flag==0 && jewelry.flag==0)
+            {
+                dress.flag=1;
+                bag.flag=1;
+                trousers.flag=1;
+                shoes.flag=1;
+                jewelry.flag=1;
+                score=40;
+                continue;
+            }
+            else if (score=90)
+                level=3;
+
 
     }
-    return 0;
+
+}
+return 0;
 }
