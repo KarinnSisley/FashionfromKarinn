@@ -50,24 +50,26 @@ int main( int argc, char *args [])
 {
     char b[20];
 
-    int shoulderx=36/2, shouldery=65,x,y,length,height,score=40,quite = 0,nenuzhnaya=1,level;
+    int shoulderx=36/2, shouldery=65,x,y,length,height,score=0,quite = 0,nenuzhnaya=1,level,i=0;
     TTF_Init();
     SDL_Surface* screen = NULL;
     SDL_Surface *message = NULL;
+    SDL_Surface *message2 = NULL;
     TTF_Font *font = NULL;
     SDL_Surface* background = NULL;
-    SDL_Rect text;
-    struct cloth girl,dress,shoes,coat,bag,jewelry,trousers,forjewelry,fortrousers,forcoat,fordress,forshoes,forbags,forshoestxt,forovercoatstxt,fordressestxt,forbagstxt,fortrouserstxt,forjewelrytxt;
+    SDL_Rect text,text2;
+    struct cloth girl,girl1, girl2,dress,shoes,coat,bag,jewelry,trousers,forjewelry,fortrousers,forcoat,fordress,forshoes,forbags,forshoestxt,forovercoatstxt,fordressestxt,forbagstxt,fortrouserstxt,forjewelrytxt;
     struct cloth *cloth_selected=NULL;
     font = TTF_OpenFont( "lazy.ttf", 28 );
     SDL_Color textColor = { 153, 51, 51 };
+    SDL_Color textColor2;
 
     SDL_Init( SDL_INIT_EVERYTHING );
 
     screen = SDL_SetVideoMode( 1024, 700, 16, SDL_SWSURFACE );
 
 
-    SDL_AddTimer(8000,callback, &nenuzhnaya);
+    SDL_AddTimer(3000,callback, &nenuzhnaya);
     level=1;
     background = IMG_Load("background1.jpg");
     girl.picture = Load_Image("dita.png");
@@ -133,11 +135,14 @@ int main( int argc, char *args [])
 
         while ( SDL_PollEvent( &event ) )
         {
+            if ( event.type == SDL_QUIT )
+                quite = 1;
+
             if (level==1)
             {
-
                 if ( !nenuzhnaya && event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
                 {
+
                     x = event.button.x;
                     y = event.button.y;
                     length=bag.offset.x + bag.offset.w;
@@ -226,8 +231,9 @@ int main( int argc, char *args [])
                         dress.flag=0;
                         cloth_selected=NULL;
                     }
-
                 }
+
+
 
                 if ( event.type == SDL_QUIT )
                     quite = 1;
@@ -274,7 +280,7 @@ int main( int argc, char *args [])
                 {
                     nenuzhnaya=1;
                     level=2;
-                    SDL_AddTimer(10000,callback, &nenuzhnaya);
+                    SDL_AddTimer(2000,callback, &nenuzhnaya);
                     background = IMG_Load("background2.png");
                     girl.picture = Load_Image("audrey.png");
                     girl.flag=1;
@@ -342,14 +348,17 @@ int main( int argc, char *args [])
                     forjewelrytxt.offset.x= 3000/5.5;
                     forjewelrytxt.offset.y=800/10;
                 }
-
             }
+
+
 
 
             if (level==2)
             {
                 if ( !nenuzhnaya && event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
+
                 {
+
                     x = event.button.x;
                     y = event.button.y;
                     length=bag.offset.x + bag.offset.w;
@@ -458,12 +467,13 @@ int main( int argc, char *args [])
                         shoes.flag=0;
                         cloth_selected=NULL;
                     }
-
-
                 }
+
+
                 if ( event.type == SDL_QUIT )
                     quite = 1;
-                SDL_AddTimer(10000,callback, &nenuzhnaya);
+
+
                 SDL_BlitSurface( background, NULL, screen, NULL );
                 blitcloth (&girl, screen);
                 blitcloth (&trousers, screen);
@@ -505,12 +515,110 @@ int main( int argc, char *args [])
                     continue;
                 }
                 else if (score==90)
+                {
                     level=3;
+                    background = IMG_Load("background3.png");
+                    girl.picture=IMG_Load("lilcasual.png");
+                    girl.flag=1;
+                    girl1.picture=IMG_Load("lilengaged.png");
+                    girl1.flag=1;
+                    girl2.picture=IMG_Load("lilevent.png");
+                    girl2.flag=1;
+                    girl.offset.x = 10;
+                    girl.offset.y = 700/3;
+                    girl1.offset.x = 450;
+                    girl1.offset.y = 700/3;
+                    girl2.offset.x = 800;
+                    girl2.offset.y = 700/3;
+                    SDL_Color textColor = { 178, 34, 34 };
+                    message = TTF_RenderText_Solid( font, "choose the appropriate look for this occasion:", textColor );
+                    text.x= 1024/2-((message->w)/2);
+                    text.y=700/18;
+                    text.w=message->w;
+                    text.h=message->h;
+                    SDL_Color textColor2 = { 244, 164, 94 };
+                    message2=TTF_RenderText_Solid( font, "your friend's engagement", textColor2 );
+                    text2.x= 1024/2-((message2->w)/2);
+                    text2.y=700/9;
+                    text2.w=message->w;
+                    text2.h=message->h;
+                    event.type=0;
+                }
             }
+            if (level==3)
+            {
+                if (  event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
+                {
+
+                    x= event.button.x;
+                    y = event.button.y;
+
+                    if (i==0)
+                    {
+                        if ((x>girl1.offset.x && x<(girl1.offset.x+girl1.offset.w)) && y>girl1.offset.y && y<(girl.offset.y+girl.offset.h))
+                        {
+                            score=score+10;
+                            girl1.flag=0;
 
 
+                        }
+                        else if ((x>girl2.offset.x && x<(girl2.offset.x+girl2.offset.w)) && (y>girl2.offset.y && y<(girl2.offset.y+girl2.offset.h)))
+                        {
+
+                            girl2.flag=0;
+
+
+                        }
+                        else if ((x>girl.offset.x && x<(girl.offset.x+girl.offset.w)) && (y>girl.offset.y && y<(girl.offset.y+girl.offset.h)))
+                        {
+                            girl.flag=0;
+
+                        }
+                        message2=TTF_RenderText_Solid( font, "film premiere", textColor2 );
+                        SDL_BlitSurface( background, &text2, screen, &text2 );
+                        i++;
+                    }
+                    else if (i==1)
+                    {
+                        if ((x>girl1.offset.x && x<(girl1.offset.x+girl1.offset.w)) && y>girl1.offset.y && y<(girl.offset.y+girl.offset.h))
+                        {
+
+                            girl1.flag=0;
+
+
+                        }
+                        else if ((x>girl2.offset.x && x<(girl2.offset.x+girl2.offset.w)) && (y>girl2.offset.y && y<(girl2.offset.y+girl2.offset.h)))
+                        {
+                            girl2.flag=0;
+                            score=score+10;
+
+
+                        }
+                        else if ((x>girl.offset.x && x<(girl.offset.x+girl.offset.w)) && (y>girl.offset.y && y<(girl.offset.y+girl.offset.h)))
+                        {
+                            girl.flag=0;
+
+                        }
+                        message2=TTF_RenderText_Solid( font, "meeting with friends", textColor2 );
+                        SDL_BlitSurface( background, &text2, screen, &text2 );
+                        i++;
+
+                    }
+
+                }
+
+                SDL_BlitSurface( background, NULL, screen, NULL );
+                SDL_BlitSurface( message, NULL,screen, &text );
+                SDL_BlitSurface( message2, NULL,screen, &text2 );
+                blitcloth (&girl, screen);
+                blitcloth (&girl1, screen);
+                blitcloth (&girl2, screen);
+                SDL_Flip( screen );
+
+
+            }
         }
-
     }
+
     return 0;
 }
