@@ -59,7 +59,7 @@ int main( int argc, char *args [])
     TTF_Font *font = NULL;
     SDL_Surface* background = NULL;
     SDL_Rect text,text2,text3;
-    struct cloth girl,girl1, girl2,girl3, dress,shoes,coat,bag,jewelry,trousers,forjewelry,fortrousers,forcoat,fordress,forshoes,forbags,forshoestxt,forovercoatstxt,fordressestxt,forbagstxt,fortrouserstxt,forjewelrytxt;
+    struct cloth girl,girl1, girl2,girl3,girl4, dress,shoes,coat,bag,jewelry,trousers,forjewelry,fortrousers,forcoat,fordress,forshoes,forbags,forshoestxt,forovercoatstxt,fordressestxt,forbagstxt,fortrouserstxt,forjewelrytxt;
     struct cloth *cloth_selected=NULL;
     font = TTF_OpenFont( "lazy.ttf", 28 );
     SDL_Color textColor = { 153, 51, 51 };
@@ -846,14 +846,18 @@ int main( int argc, char *args [])
                     girl2.flag=1;
                     girl3.picture=IMG_Load("fordances.png");
                     girl3.flag=1;
-                    girl.offset.x = 10;
+                    girl4.picture=Load_Image("forwedding.png");
+                    girl4.flag=1;
+                    girl.offset.x = 8;
                     girl.offset.y = 600/5+20;
-                    girl1.offset.x = 250;
+                    girl1.offset.x = 200;
                     girl1.offset.y = 600/5+20;
-                    girl2.offset.x = 530;
+                    girl2.offset.x = 600;
                     girl2.offset.y = 600/5+20;
-                    girl3.offset.x = 800;
+                    girl3.offset.x = 820;
                     girl3.offset.y = 600/5+20;
+                    girl4.offset.x = 400;
+                    girl4.offset.y = 600/5+20;
                     message3 = TTF_RenderText_Solid( font, "choose the appropriate look for this occasion", textColor );
                     text3.x= 1024/2-((message3->w)/2);
                     text3.y=700/18;
@@ -870,7 +874,7 @@ int main( int argc, char *args [])
             }
             if (level==5)
             {
-
+                score=210;
                 SDL_Color textColor2 = {205,51,51};
                 if (  event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
                 {
@@ -897,6 +901,10 @@ int main( int argc, char *args [])
                             girl3.flag=0;
                             score=score+10;
                         }
+                        else if ((x>girl4.offset.x && x<(girl4.offset.x+girl4.offset.w)) && (y>girl4.offset.y && y<(girl4.offset.y+girl4.offset.h)))
+                        {
+                            girl4.flag=0;
+                        }
                         message2=TTF_RenderText_Solid( font, "you are celebrating yiur 18-th birthday", textColor2 );
                         SDL_BlitSurface( background, &text2, screen, &text2 );
                         i++;
@@ -919,6 +927,10 @@ int main( int argc, char *args [])
                         else if ((x>girl3.offset.x && x<(girl3.offset.x+girl3.offset.w)) && (y>girl3.offset.y && y<(girl3.offset.y+girl3.offset.h)))
                         {
                             girl3.flag=0;
+                        }
+                        else if ((x>girl4.offset.x && x<(girl4.offset.x+girl4.offset.w)) && (y>girl4.offset.y && y<(girl4.offset.y+girl4.offset.h)))
+                        {
+                            girl4.flag=0;
                         }
                         message2=TTF_RenderText_Solid( font, "are looking for a boyfriend", textColor2 );
                         SDL_BlitSurface( background, &text2, screen, &text2 );
@@ -944,7 +956,11 @@ int main( int argc, char *args [])
                         {
                             girl3.flag=0;
                         }
-                        message2=TTF_RenderText_Solid( font, "are going to the cinema", textColor2 );
+                        else if ((x>girl4.offset.x && x<(girl4.offset.x+girl4.offset.w)) && (y>girl4.offset.y && y<(girl4.offset.y+girl4.offset.h)))
+                        {
+                            girl4.flag=0;
+                        }
+                        message2=TTF_RenderText_Solid( font, "you are going to the cinema", textColor2 );
                         SDL_BlitSurface( background, &text2, screen, &text2 );
                         i++;
                     }
@@ -968,10 +984,48 @@ int main( int argc, char *args [])
                         {
                             girl3.flag=0;
                         }
-
+                        else if ((x>girl4.offset.x && x<(girl4.offset.x+girl4.offset.w)) && (y>girl4.offset.y && y<(girl4.offset.y+girl4.offset.h)))
+                        {
+                            girl4.flag=0;
+                        }
+                        message2=TTF_RenderText_Solid( font, "you are going to your daughter's wedding ceremony", textColor2 );
+                        SDL_BlitSurface( background, &text2, screen, &text2 );
                         i++;
                     }
+                    else if (i==4)
+                    {
+                        if ((x>girl1.offset.x && x<(girl1.offset.x+girl1.offset.w)) && y>girl1.offset.y && y<(girl1.offset.y+girl1.offset.h))
+                        {
+                            girl1.flag=0;
+
+                        }
+                        else if ((x>girl2.offset.x && x<(girl2.offset.x+girl2.offset.w)) && (y>girl2.offset.y && y<(girl2.offset.y+girl2.offset.h)))
+                        {
+                            girl2.flag=0;
+                            score=score+10;
+                        }
+                        else if ((x>girl.offset.x && x<(girl.offset.x+girl.offset.w)) && (y>girl.offset.y && y<(girl.offset.y+girl.offset.h)))
+                        {
+                            girl.flag=0;
+                        }
+                        else if ((x>girl3.offset.x && x<(girl3.offset.x+girl3.offset.w)) && (y>girl3.offset.y && y<(girl3.offset.y+girl3.offset.h)))
+                        {
+                            girl3.flag=0;
+                        }
+                        else if ((x>girl4.offset.x && x<(girl4.offset.x+girl4.offset.w)) && (y>girl4.offset.y && y<(girl4.offset.y+girl4.offset.h)))
+                        {
+                            girl4.flag=0;
+                            score=score+10;
+                        }
+                        i++;
+
+
+                    }
                 }
+                text2.x= 1024/2-((message2->w)/2);
+                text2.y=700/9;
+                text2.w=message->w;
+                text2.h=message->h;
                 SDL_BlitSurface( background, NULL, screen, NULL );
                 SDL_BlitSurface( message3, NULL,screen, &text3 );
                 SDL_BlitSurface( message2, NULL,screen, &text2 );
@@ -979,6 +1033,7 @@ int main( int argc, char *args [])
                 blitcloth (&girl1, screen);
                 blitcloth (&girl2, screen);
                 blitcloth (&girl3, screen);
+                blitcloth (&girl4, screen);
                 snprintf(b, sizeof (b), "score: %d", score);
                 message = TTF_RenderText_Solid( font, b, textColor );
                 text.x= 880;
@@ -987,7 +1042,270 @@ int main( int argc, char *args [])
                 text.h=message->h;
                 SDL_BlitSurface( message, NULL,screen, &text );
                 SDL_Flip( screen );
+                if (score<210 && girl.flag==0 && girl1.flag==0 && girl2.flag==0 && girl3.flag==0 && girl4.flag==0)
+                {
+                    score=120;
+                    girl.flag=1;
+                    girl1.flag=1;
+                    girl2.flag=1;
+                    girl3.flag=1;
+                    girl4.flag=1;
+                    i=0;
+                    SDL_Color textColor2 = {205,112,84};
+                    message2=TTF_RenderText_Solid( font, "you are going to dance", textColor2 );
+                    text2.x= 1024/2-((message2->w)/2);
+                    text2.y=700/9;
+                    text2.w=message->w;
+                    text2.h=message->h;
+                    continue;
+                }
+                else if (score==210)
+                {
+                    level=6;
+                    i=0;
+                    background = IMG_Load("background6.png");
+                    girl.picture=IMG_Load("lawer.png");
+                    girl.flag=1;
+                    girl1.picture=IMG_Load("candies.png");
+                    girl1.flag=1;
+                    girl2.picture=Load_Image("danceteacher.png");
+                    girl2.flag=1;
+                    girl3.picture=IMG_Load("diplomat.png");
+                    girl3.flag=1;
+                    girl4.picture=IMG_Load("businesswoman.png");
+                    girl4.flag=1;
+                    girl.offset.x = 8;
+                    girl.offset.y = 600/5;
+                    girl1.offset.x = 200;
+                    girl1.offset.y = 600/5+20;
+                    girl2.offset.x = 620;
+                    girl2.offset.y = 600/5+20;
+                    girl3.offset.x = 820;
+                    girl3.offset.y = 600/5;
+                    girl4.offset.x = 400;
+                    girl4.offset.y = 600/5+40;
+                    message3 = TTF_RenderText_Solid( font, "choose the appropriate look for each occupation", textColor );
+                    text3.x= 1024/2-((message3->w)/2);
+                    text3.y=700/18;
+                    text3.w=message3->w;
+                    text3.h=message3->h;
+                    SDL_Color textColor2 = {139,131,134};
+                    message2=TTF_RenderText_Solid( font, "you are a shop assistant in candy shop", textColor2 );
+                    text2.x= 1024/2-((message2->w)/2);
+                    text2.y=700/9;
+                    text2.w=message->w;
+                    text2.h=message->h;
+                    event.type=0;
+                }
+                SDL_Flip( screen );
+            }
+            if (level==6)
+            {
+                SDL_Color textColor2 = {139,131,134};
+                if (  event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
+                {
+                    x= event.button.x;
+                    y = event.button.y;
 
+
+                    if (i==0)
+                    {
+                        if ((x>girl1.offset.x && x<(girl1.offset.x+girl1.offset.w)) && y>girl1.offset.y && y<(girl1.offset.y+girl1.offset.h))
+                        {
+                            girl1.flag=0;
+                            score=score+10;
+                        }
+                        else if ((x>girl2.offset.x && x<(girl2.offset.x+girl2.offset.w)) && (y>girl2.offset.y && y<(girl2.offset.y+girl2.offset.h)))
+                        {
+                            girl2.flag=0;
+                        }
+                        else if ((x>girl.offset.x && x<(girl.offset.x+girl.offset.w)) && (y>girl.offset.y && y<(girl.offset.y+girl.offset.h)))
+                        {
+                            girl.flag=0;
+                        }
+                        else if ((x>girl3.offset.x && x<(girl3.offset.x+girl3.offset.w)) && (y>girl3.offset.y && y<(girl3.offset.y+girl3.offset.h)))
+                        {
+                            girl3.flag=0;
+                        }
+                        else if ((x>girl4.offset.x && x<(girl4.offset.x+girl4.offset.w)) && (y>girl4.offset.y && y<(girl4.offset.y+girl4.offset.h)))
+                        {
+                            girl4.flag=0;
+                        }
+                        message2=TTF_RenderText_Solid( font, "diplomat", textColor2 );
+                        SDL_BlitSurface( background, &text2, screen, &text2 );
+                        i++;
+                    }
+                    else if (i==1)
+                    {
+                        if ((x>girl1.offset.x && x<(girl1.offset.x+girl1.offset.w)) && y>girl1.offset.y && y<(girl1.offset.y+girl1.offset.h))
+                        {
+                            girl1.flag=0;
+                        }
+                        else if ((x>girl2.offset.x && x<(girl2.offset.x+girl2.offset.w)) && (y>girl2.offset.y && y<(girl2.offset.y+girl2.offset.h)))
+                        {
+                            girl2.flag=0;
+                        }
+                        else if ((x>girl.offset.x && x<(girl.offset.x+girl.offset.w)) && (y>girl.offset.y && y<(girl.offset.y+girl.offset.h)))
+                        {
+                            girl.flag=0;
+
+                        }
+                        else if ((x>girl3.offset.x && x<(girl3.offset.x+girl3.offset.w)) && (y>girl3.offset.y && y<(girl3.offset.y+girl3.offset.h)))
+                        {
+                            girl3.flag=0;
+                            score=score+10;
+                        }
+                        else if ((x>girl4.offset.x && x<(girl4.offset.x+girl4.offset.w)) && (y>girl4.offset.y && y<(girl4.offset.y+girl4.offset.h)))
+                        {
+                            girl4.flag=0;
+                        }
+                        message2=TTF_RenderText_Solid( font, "businesswoman", textColor2 );
+                        SDL_BlitSurface( background, &text2, screen, &text2 );
+                        i++;
+
+                    }
+                    else if (i==2)
+                    {
+                        if ((x>girl1.offset.x && x<(girl1.offset.x+girl1.offset.w)) && y>girl1.offset.y && y<(girl1.offset.y+girl1.offset.h))
+                        {
+                            girl1.flag=0;
+
+                        }
+                        else if ((x>girl2.offset.x && x<(girl2.offset.x+girl2.offset.w)) && (y>girl2.offset.y && y<(girl2.offset.y+girl2.offset.h)))
+                        {
+                            girl2.flag=0;
+                        }
+                        else if ((x>girl.offset.x && x<(girl.offset.x+girl.offset.w)) && (y>girl.offset.y && y<(girl.offset.y+girl.offset.h)))
+                        {
+                            girl.flag=0;
+                        }
+                        else if ((x>girl3.offset.x && x<(girl3.offset.x+girl3.offset.w)) && (y>girl3.offset.y && y<(girl3.offset.y+girl3.offset.h)))
+                        {
+                            girl3.flag=0;
+                        }
+                        else if ((x>girl4.offset.x && x<(girl4.offset.x+girl4.offset.w)) && (y>girl4.offset.y && y<(girl4.offset.y+girl4.offset.h)))
+                        {
+                            girl4.flag=0;
+                            score=score+10;
+                        }
+                        message2=TTF_RenderText_Solid( font, "lawer", textColor2 );
+                        SDL_BlitSurface( background, &text2, screen, &text2 );
+                        i++;
+                    }
+                    else if (i==3)
+                    {
+                        if ((x>girl1.offset.x && x<(girl1.offset.x+girl1.offset.w)) && y>girl1.offset.y && y<(girl1.offset.y+girl1.offset.h))
+                        {
+                            girl1.flag=0;
+
+                        }
+                        else if ((x>girl2.offset.x && x<(girl2.offset.x+girl2.offset.w)) && (y>girl2.offset.y && y<(girl2.offset.y+girl2.offset.h)))
+                        {
+                            girl2.flag=0;
+                        }
+                        else if ((x>girl.offset.x && x<(girl.offset.x+girl.offset.w)) && (y>girl.offset.y && y<(girl.offset.y+girl.offset.h)))
+                        {
+                            girl.flag=0;
+                            score=score+10;
+                        }
+                        else if ((x>girl3.offset.x && x<(girl3.offset.x+girl3.offset.w)) && (y>girl3.offset.y && y<(girl3.offset.y+girl3.offset.h)))
+                        {
+                            girl3.flag=0;
+                        }
+                        else if ((x>girl4.offset.x && x<(girl4.offset.x+girl4.offset.w)) && (y>girl4.offset.y && y<(girl4.offset.y+girl4.offset.h)))
+                        {
+                            girl4.flag=0;
+
+                        }
+                        message2=TTF_RenderText_Solid( font, "dance teacher", textColor2 );
+                        SDL_BlitSurface( background, &text2, screen, &text2 );
+                        i++;
+                    }
+                    else if (i==4)
+                    {
+                        if ((x>girl1.offset.x && x<(girl1.offset.x+girl1.offset.w)) && y>girl1.offset.y && y<(girl1.offset.y+girl1.offset.h))
+                        {
+                            girl1.flag=0;
+
+                        }
+                        else if ((x>girl2.offset.x && x<(girl2.offset.x+girl2.offset.w)) && (y>girl2.offset.y && y<(girl2.offset.y+girl2.offset.h)))
+                        {
+                            girl2.flag=0;
+                            score=score+10;
+                        }
+                        else if ((x>girl.offset.x && x<(girl.offset.x+girl.offset.w)) && (y>girl.offset.y && y<(girl.offset.y+girl.offset.h)))
+                        {
+                            girl.flag=0;
+                        }
+                        else if ((x>girl3.offset.x && x<(girl3.offset.x+girl3.offset.w)) && (y>girl3.offset.y && y<(girl3.offset.y+girl3.offset.h)))
+                        {
+                            girl3.flag=0;
+                        }
+                        else if ((x>girl4.offset.x && x<(girl4.offset.x+girl4.offset.w)) && (y>girl4.offset.y && y<(girl4.offset.y+girl4.offset.h)))
+                        {
+                            girl4.flag=0;
+                            score=score+10;
+                        }
+                        i++;
+                    }
+                }
+                text2.x= 1024/2-((message2->w)/2);
+                text2.y=700/9;
+                text2.w=message->w;
+                text2.h=message->h;
+                SDL_BlitSurface( background, NULL, screen, NULL );
+                SDL_BlitSurface( message3, NULL,screen, &text3 );
+                SDL_BlitSurface( message2, NULL,screen, &text2 );
+                blitcloth (&girl, screen);
+                blitcloth (&girl1, screen);
+                blitcloth (&girl2, screen);
+                blitcloth (&girl3, screen);
+                blitcloth (&girl4, screen);
+                snprintf(b, sizeof (b), "score: %d", score);
+                message = TTF_RenderText_Solid( font, b, textColor );
+                text.x= 880;
+                text.y=700/18;
+                text.w=message->w;
+                text.h=message->h;
+                SDL_BlitSurface( message, NULL,screen, &text );
+                SDL_Flip( screen );
+                if (score<260 && girl.flag==0 && girl1.flag==0 && girl2.flag==0 && girl3.flag==0 && girl4.flag==0)
+                {
+                    score=210;
+                    girl.flag=1;
+                    girl1.flag=1;
+                    girl2.flag=1;
+                    girl3.flag=1;
+                    girl4.flag=1;
+                    i=0;
+                    SDL_Color textColor2 = {139,131,134};
+                    message2=TTF_RenderText_Solid( font, "you are a shop assistant in candy shop", textColor2 );
+                    text2.x= 1024/2-((message2->w)/2);
+                    text2.y=700/9;
+                    text2.w=message->w;
+                    text2.h=message->h;
+                    continue;
+                }
+                else if (score==260)
+                {
+                    level=7;
+                    event.type=0;
+                    font = TTF_OpenFont( "lazy.ttf", 72 );
+                }
+            }
+            if(level==7)
+            {
+                background = IMG_Load("background6.png");
+                SDL_Color textColor2 = {205,51,51};
+                message=TTF_RenderText_Solid( font, "C", textColor2 );
+                text.x= 1024/2-(message->w);
+                for (i=0; i<((700/2)+1); i=i+0.1)
+                text.y=i;
+                text.w=message->w;
+                text.h=message->h;
+                SDL_BlitSurface( background, NULL, screen, NULL );
+                SDL_BlitSurface( message, NULL,screen, &text );
+                SDL_Flip( screen );
             }
         }
     }

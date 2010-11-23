@@ -30,13 +30,13 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add directory="C:\Users\Karinn\МАТИ\информатика\SDL-1.2.14\include" />
-			<Add directory="C:\Users\Karinn\МАТИ\информатика\SDL_ttf-2.0.10\include" />
+			<Add directory="D:\Karinn\МАТИ\информатика\SDL-1.2.14\include" />
+			<Add directory="D:\Karinn\МАТИ\информатика\SDL_ttf-2.0.10\include" />
 		</Compiler>
 		<Linker>
 			<Add option="-lmingw32 -lSDLmain -lSDL -lSDL_image -lSDL_ttf" />
-			<Add directory="C:\Users\Karinn\МАТИ\информатика\SDL-1.2.14\lib" />
-			<Add directory="C:\Users\Karinn\МАТИ\информатика\SDL_ttf-2.0.10\lib" />
+			<Add directory="D:\Karinn\МАТИ\информатика\SDL-1.2.14\lib" />
+			<Add directory="D:\Karinn\МАТИ\информатика\SDL_ttf-2.0.10\lib" />
 		</Linker>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
