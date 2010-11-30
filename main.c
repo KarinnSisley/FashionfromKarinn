@@ -50,15 +50,29 @@ int main( int argc, char *args [])
 {
     char b[20];
 
-    int shoulderx=36/2, shouldery=65,x,y,length,height,score=40,quite = 0,nenuzhnaya=1,level,i=0;
+    int shoulderx=36/2, shouldery=65,x,y,length,height,score=0,quite = 0,nenuzhnaya=1,level,n=700/4+100;
+    double i=0;
     TTF_Init();
     SDL_Surface* screen = NULL;
     SDL_Surface *message = NULL;
     SDL_Surface *message2 = NULL;
     SDL_Surface *message3 = NULL;
+    SDL_Surface *message4 = NULL;
+    SDL_Surface *message5 = NULL;
+    SDL_Surface *message6 = NULL;
+    SDL_Surface *message7 = NULL;
+    SDL_Surface *message8 = NULL;
+    SDL_Surface *message9 = NULL;
+    SDL_Surface *message10 = NULL;
+    SDL_Surface *message11 = NULL;
+    SDL_Surface *message12 = NULL;
+    SDL_Surface *message13 = NULL;
+    SDL_Surface *message14 = NULL;
+    SDL_Surface *message15= NULL;
+    SDL_Surface *message16 = NULL;
     TTF_Font *font = NULL;
     SDL_Surface* background = NULL;
-    SDL_Rect text,text2,text3;
+    SDL_Rect text,text2,text3,text4,text5,text6,text7,text8,text9,text10,text11,text12,text13,text14,text15,text16;
     struct cloth girl,girl1, girl2,girl3,girl4, dress,shoes,coat,bag,jewelry,trousers,forjewelry,fortrousers,forcoat,fordress,forshoes,forbags,forshoestxt,forovercoatstxt,fordressestxt,forbagstxt,fortrouserstxt,forjewelrytxt;
     struct cloth *cloth_selected=NULL;
     font = TTF_OpenFont( "lazy.ttf", 28 );
@@ -141,6 +155,7 @@ int main( int argc, char *args [])
 
             if (level==1)
             {
+
                 if ( !nenuzhnaya && event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
                 {
 
@@ -148,7 +163,7 @@ int main( int argc, char *args [])
                     y = event.button.y;
                     length=bag.offset.x + bag.offset.w;
                     height=bag.offset.y + bag.offset.h;
-                    if (x>bag.offset.x && x<(length) && y>bag.offset.y && y<(height))
+                    if (x>bag.offset.x && x<(length) && y>bag.offset.y && y<(height)&& bag.flag==1)
                     {
                         cloth_selected=&bag;
                         continue;
@@ -168,7 +183,7 @@ int main( int argc, char *args [])
 
                     length=coat.offset.x + coat.offset.w;
                     height=coat.offset.y + coat.offset.h;
-                    if (x>coat.offset.x && x<(length) && y>coat.offset.y && y<(height))
+                    if (x>coat.offset.x && x<(length) && y>coat.offset.y && y<(height)&&coat.flag==1)
                     {
                         cloth_selected=&coat;
                         continue;
@@ -191,7 +206,7 @@ int main( int argc, char *args [])
                     y = event.button.y;
                     length=shoes.offset.x + shoes.offset.w;
                     height=shoes.offset.y + shoes.offset.h;
-                    if (x>shoes.offset.x && x<(length) && y>shoes.offset.y && y<(height))
+                    if (x>shoes.offset.x && x<(length) && y>shoes.offset.y && y<(height)&& shoes.flag==1)
                     {
                         cloth_selected=&shoes;
                         continue;
@@ -214,7 +229,7 @@ int main( int argc, char *args [])
                     y = event.button.y;
                     length=dress.offset.x + dress.offset.w;
                     height=dress.offset.y + dress.offset.h;
-                    if (x>dress.offset.x && x<(length) && y>dress.offset.y && y<(height))
+                    if (x>dress.offset.x && x<(length) && y>dress.offset.y && y<(height)&& dress.flag==1)
                     {
                         cloth_selected=&dress;
                         continue;
@@ -356,7 +371,8 @@ int main( int argc, char *args [])
 
             if (level==2)
             {
-                score=90;
+
+
                 if ( !nenuzhnaya && event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
 
                 {
@@ -366,7 +382,7 @@ int main( int argc, char *args [])
                     y = event.button.y;
                     length=bag.offset.x + bag.offset.w;
                     height=bag.offset.y + bag.offset.h;
-                    if (x>bag.offset.x && x<(length) && y>bag.offset.y && y<(height))
+                    if (x>bag.offset.x && x<(length) && y>bag.offset.y && y<(height)&&bag.flag==1)
                     {
                         cloth_selected=&bag;
                         continue;
@@ -386,7 +402,7 @@ int main( int argc, char *args [])
                     y = event.button.y;
                     length=dress.offset.x + dress.offset.w;
                     height=dress.offset.y + dress.offset.h;
-                    if (x>dress.offset.x && x<(length) && y>dress.offset.y && y<(height))
+                    if (x>dress.offset.x && x<(length) && y>dress.offset.y && y<(height)&&dress.flag==1)
                     {
                         cloth_selected=&dress;
                         continue;
@@ -406,7 +422,7 @@ int main( int argc, char *args [])
                     }
                     length=trousers.offset.x + trousers.offset.w;
                     height=trousers.offset.y + trousers.offset.h;
-                    if (x>trousers.offset.x && x<(length) && y>trousers.offset.y && y<(height))
+                    if (x>trousers.offset.x && x<(length) && y>trousers.offset.y && y<(height)&&trousers.flag==1)
                     {
                         cloth_selected=&trousers;
                         continue;
@@ -427,7 +443,7 @@ int main( int argc, char *args [])
                     }
                     length=jewelry.offset.x + jewelry.offset.w;
                     height=jewelry.offset.y + jewelry.offset.h;
-                    if (x>jewelry.offset.x && x<(length) && y>jewelry.offset.y && y<(height))
+                    if (x>jewelry.offset.x && x<(length) && y>jewelry.offset.y && y<(height)&&jewelry.flag==1)
                     {
                         cloth_selected=&jewelry;
                         continue;
@@ -451,7 +467,7 @@ int main( int argc, char *args [])
                     y = event.button.y;
                     length=shoes.offset.x + shoes.offset.w;
                     height=shoes.offset.y + shoes.offset.h;
-                    if (x>shoes.offset.x && x<(length) && y>shoes.offset.y && y<(height))
+                    if (x>shoes.offset.x && x<(length) && y>shoes.offset.y && y<(height)&&shoes.flag==1)
                     {
                         cloth_selected=&shoes;
                         continue;
@@ -550,7 +566,8 @@ int main( int argc, char *args [])
             }
             if (level==3)
             {
-                score=120;
+
+
                 if (  event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
                 {
 
@@ -700,7 +717,8 @@ int main( int argc, char *args [])
             }
             if (level==4)
             {
-                score=160;
+
+
                 SDL_Color textColor2 = {205,112,84};
                 if (  event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
                 {
@@ -874,7 +892,8 @@ int main( int argc, char *args [])
             }
             if (level==5)
             {
-                score=210;
+
+
                 SDL_Color textColor2 = {205,51,51};
                 if (  event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
                 {
@@ -1044,7 +1063,7 @@ int main( int argc, char *args [])
                 SDL_Flip( screen );
                 if (score<210 && girl.flag==0 && girl1.flag==0 && girl2.flag==0 && girl3.flag==0 && girl4.flag==0)
                 {
-                    score=120;
+                    score=160;
                     girl.flag=1;
                     girl1.flag=1;
                     girl2.flag=1;
@@ -1101,6 +1120,7 @@ int main( int argc, char *args [])
             }
             if (level==6)
             {
+
                 SDL_Color textColor2 = {139,131,134};
                 if (  event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
                 {
@@ -1290,22 +1310,165 @@ int main( int argc, char *args [])
                 {
                     level=7;
                     event.type=0;
-                    font = TTF_OpenFont( "lazy.ttf", 72 );
+                    font = TTF_OpenFont( "lazy.ttf", 82 );
                 }
             }
-            if(level==7)
+            if (level==7)
             {
-                background = IMG_Load("background6.png");
+                background = IMG_Load("background7.png");
                 SDL_Color textColor2 = {205,51,51};
                 message=TTF_RenderText_Solid( font, "C", textColor2 );
-                text.x= 1024/2-(message->w);
-                for (i=0; i<((700/2)+1); i=i+0.1)
-                text.y=i;
-                text.w=message->w;
-                text.h=message->h;
-                SDL_BlitSurface( background, NULL, screen, NULL );
-                SDL_BlitSurface( message, NULL,screen, &text );
-                SDL_Flip( screen );
+                message2=TTF_RenderText_Solid( font, "O", textColor2 );
+                message3=TTF_RenderText_Solid( font, "N", textColor2 );
+                message4=TTF_RenderText_Solid( font, "G", textColor2 );
+                message5=TTF_RenderText_Solid( font, "R", textColor2 );
+                message6=TTF_RenderText_Solid( font, "A", textColor2 );
+                message7=TTF_RenderText_Solid( font, "T", textColor2 );
+                message8=TTF_RenderText_Solid( font, "U", textColor2 );
+                message9=TTF_RenderText_Solid( font, "L", textColor2 );
+                message10=TTF_RenderText_Solid( font, "A", textColor2 );
+                message11=TTF_RenderText_Solid( font, "T", textColor2 );
+                message12=TTF_RenderText_Solid( font, "E", textColor2 );
+                message13=TTF_RenderText_Solid( font, "!", textColor2 );
+                girl.picture=Load_Image("marlen.png");
+                girl.flag=1;
+                girl1.picture=Load_Image("maria.png");
+                girl1.flag=1;
+                girl2.picture=Load_Image("mai.png");
+                girl2.flag=1;
+                girl3.picture=Load_Image("louise.png");
+                girl3.flag=1;
+                girl4.picture=Load_Image("natali.png");
+                girl4.flag=1;
+                dress.picture=Load_Image("malin.png");
+                dress.flag=1;
+                shoes.picture=Load_Image("maggie.png");
+                shoes.flag=1;
+                coat.picture=Load_Image("mary.png");
+                coat.flag=1;
+                bag.picture=Load_Image("mary-kate.png");
+                bag.flag=1;
+                jewelry.picture=Load_Image("miley.png");
+                jewelry.flag=1;
+                trousers.picture=Load_Image("nicole.png");
+                trousers.flag=1;
+
+                while (i<(700/4))
+                {
+                    text.y=i;
+                    text2.y=i*0.75;
+                    text3.y=i;
+                    text4.y=i*0.75;
+                    text5.y=i;
+                    text6.y=i*0.75;
+                    text7.y=i;
+                    text8.y=i*0.75;
+                    text9.y=i;
+                    text10.y=i*0.75;
+                    text11.y=i;
+                    text12.y=i*0.75;
+                    text13.y=i;
+                    text14.y=i*0.75;
+                    text15.y=i;
+                    text16.y=i*0.75;
+                    i=i+5;
+
+                    text.x= 4;
+                    text.w=message->w;
+                    text.h=message->h;
+                    text2.x= 80;
+                    text2.w=message2->w;
+                    text2.h=message2->h;
+                    text3.x= 120;
+                    text3.w=message3->w;
+                    text3.h=message3->h;
+                    text4.x= 250;
+                    text4.w=message4->w;
+                    text4.h=message4->h;
+                    text5.x= 300;
+                    text5.w=message5->w;
+                    text5.h=message5->h;
+                    text6.x= 380;
+                    text6.w=message6->w;
+                    text6.h=message6->h;
+                    text7.x= 490;
+                    text7.w=message7->w;
+                    text7.h=message7->h;
+                    text8.x= 570;
+                    text8.w=message8->w;
+                    text8.h=message8->h;
+                    text9.x= 620;
+                    text9.w=message9->w;
+                    text9.h=message9->h;
+                    text10.x= 720;
+                    text10.w=message10->w;
+                    text10.h=message10->h;
+                    text11.x= 830;
+                    text11.w=message11->w;
+                    text11.h=message11->h;
+                    text12.x= 910;
+                    text12.w=message12->w;
+                    text12.h=message12->h;
+                    text13.x=990;
+                    text13.w=message13->w;
+                    text13.h=message13->h;
+
+                    SDL_BlitSurface( background, NULL, screen, NULL );
+                    SDL_BlitSurface( message, NULL,screen, &text );
+                    SDL_BlitSurface( message2, NULL,screen, &text2 );
+                    SDL_BlitSurface( message3, NULL,screen, &text3 );
+                    SDL_BlitSurface( message4, NULL,screen, &text4 );
+                    SDL_BlitSurface( message5, NULL,screen, &text5 );
+                    SDL_BlitSurface( message6, NULL,screen, &text6 );
+                    SDL_BlitSurface( message7, NULL,screen, &text7 );
+                    SDL_BlitSurface( message8, NULL,screen, &text8 );
+                    SDL_BlitSurface( message9, NULL,screen, &text9 );
+                    SDL_BlitSurface( message10, NULL,screen, &text10 );
+                    SDL_BlitSurface( message11, NULL,screen, &text11 );
+                    SDL_BlitSurface( message12, NULL,screen, &text12 );
+                    SDL_BlitSurface( message13, NULL,screen, &text13 );
+                    SDL_Flip( screen );
+
+                }
+                if (i>=700/4)
+                {
+                    girl.offset.x = 8;
+                    girl.offset.y = n;
+                    girl1.offset.x = 100;
+                    girl1.offset.y = n;
+                    girl3.offset.x = 180;
+                    girl3.offset.y = n;
+                    girl2.offset.x=260;
+                    girl2.offset.y=n;
+                    girl4.offset.x=350;
+                    girl4.offset.y=n;
+                    dress.offset.x=440;
+                    dress.offset.y=n;
+                    shoes.offset.x=545;
+                    shoes.offset.y=n;
+                    coat.offset.x=610;
+                    coat.offset.y=n;
+                    bag.offset.x=710;
+                    bag.offset.y=n;
+                    jewelry.offset.x=810;
+                    jewelry.offset.y=n;
+                    trousers.offset.x=890;
+                    trousers.offset.y=n;
+                    blitcloth (&girl, screen);
+                    blitcloth (&girl1, screen);
+                    blitcloth (&girl2, screen);
+                    blitcloth (&girl3, screen);
+                    blitcloth (&girl4, screen);
+                    blitcloth (&dress, screen);
+                    blitcloth (&shoes, screen);
+                    blitcloth (&coat, screen);
+                    blitcloth (&bag, screen);
+                    blitcloth (&jewelry, screen);
+                    blitcloth (&trousers, screen);
+                    SDL_Flip( screen );
+                }
+
+
             }
         }
     }
